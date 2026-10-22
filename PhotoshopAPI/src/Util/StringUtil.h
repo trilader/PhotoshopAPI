@@ -7,7 +7,7 @@
 #include <vector>
 #include <random>
 
-#include "stduuid/uuid.h"
+#include <uuid.h>
 
 PSAPI_NAMESPACE_BEGIN
 
