@@ -79,7 +79,7 @@ namespace ZIP_Impl
 			// First de-interleave the data to planar byte order, i.e. going from 1234 1234 1234 1234 to 1111 2222 3333 4444
 			// We essentially split each scanline into 4 equal parts each holding the first, second, third and fourth of the original bytes
 			// We also convert to big endian order which is what is stored on disk
-			std::for_each(std::execution::par, verticalIter.begin(), verticalIter.end(), [&](uint32_t y)
+			std::for_each(PSAPI_EXEC_PARALLEL verticalIter.begin(), verticalIter.end(), [&](uint32_t y)
 				{
 					// Binary view into the whole scanline
 					std::span<uint8_t> scanlineView(byteDataView.data() + y * width * sizeof(float32_t), width * sizeof(float32_t));
@@ -93,7 +93,7 @@ namespace ZIP_Impl
 		{
 			PSAPI_PROFILE_SCOPE("32-bit binary prediction encode");
 			// Perform the prediction encoding of the data, keep in mind that this is done byte by byte
-			std::for_each(std::execution::par, verticalIter.begin(), verticalIter.end(),
+			std::for_each(PSAPI_EXEC_PARALLEL verticalIter.begin(), verticalIter.end(),
 				[&](uint32_t y)
 				{
 					// Generate a non-overlapping view of each row of the data

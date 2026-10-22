@@ -65,7 +65,7 @@ namespace Render
 		}
 
 		auto indices = std::views::iota(static_cast<std::size_t>(0), first.size());
-		std::for_each(std::execution::par_unseq, indices.begin(), indices.end(), [&buffer, &spans, &first](auto idx)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ indices.begin(), indices.end(), [&buffer, &spans, &first](auto idx)
 			{
 				const std::size_t start_idx = spans.size() * idx;
 				for (size_t i = 0; i < spans.size(); ++i)
@@ -144,7 +144,7 @@ namespace Render
 		}
 
 		auto indices = std::views::iota(static_cast<std::size_t>(0), spans.front().size());
-		std::for_each(std::execution::par_unseq, indices.begin(), indices.end(), [&buffer, &spans](auto idx)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ indices.begin(), indices.end(), [&buffer, &spans](auto idx)
 			{
 				const std::size_t start_idx = spans.size() * idx;
 				for (size_t i = 0; i < spans.size(); ++i)

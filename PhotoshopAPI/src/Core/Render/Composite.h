@@ -220,7 +220,7 @@ namespace Composite
 					const auto layer_channel = layer.channels.at(_index);
 
 					// Iterate the channels and apply the kernel.
-					std::for_each(std::execution::par_unseq, vertical_iter.begin(), vertical_iter.end(), [&](size_t y)
+					std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertical_iter.begin(), vertical_iter.end(), [&](size_t y)
 						{
 							for (auto x : horizontal_iter)
 							{
@@ -257,7 +257,7 @@ namespace Composite
 					}
 
 					// Apply the alpha compositing as the last step.
-					std::for_each(std::execution::par_unseq, vertical_iter.begin(), vertical_iter.end(), [&](size_t y)
+					std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertical_iter.begin(), vertical_iter.end(), [&](size_t y)
 						{
 							for (auto x : horizontal_iter)
 							{

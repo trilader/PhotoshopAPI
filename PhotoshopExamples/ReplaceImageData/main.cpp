@@ -41,7 +41,7 @@ int main()
 	// Now we do our modifications. In this example we apply a sRGB -> linear operation
 	for (auto& [_, value] : channels)
 	{
-		std::for_each(std::execution::par, value.begin(), value.end(), [&](uint8_t& pixelValue) 
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ value.begin(), value.end(), [&](uint8_t& pixelValue)
 			{
 				pixelValue = static_cast<uint8_t>(std::round(srgbToLinear(pixelValue) * 255.0f));
 			});

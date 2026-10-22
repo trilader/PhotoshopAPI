@@ -331,7 +331,7 @@ protected:
 
 		std::mutex img_data_mutex;
 
-		std::for_each(std::execution::par_unseq, keys.begin(), keys.end(), [&](auto key) 
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ keys.begin(), keys.end(), [&](auto key)
 			{
 				auto vec = std::vector<T>(data_size);
 				std::lock_guard<std::mutex> lock(img_data_mutex);

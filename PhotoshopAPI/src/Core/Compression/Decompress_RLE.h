@@ -209,7 +209,7 @@ void DecompressRLE(ByteStream& stream, std::span<T> buffer, uint64_t offset, con
     {
         PSAPI_PROFILE_SCOPE("DecompressPackBits");
         // Decompress using the PackBits algorithm
-        std::for_each(std::execution::par, verticalIter.begin(), verticalIter.end(), [&](auto index)
+        std::for_each(PSAPI_EXEC_PARALLEL verticalIter.begin(), verticalIter.end(), [&](auto index)
             {
 #ifdef __AVX2__
                 RLE_Impl::DecompressPackBitsAVX2<T>(compressedDataSpans[index], decompressedDataSpans[index]);

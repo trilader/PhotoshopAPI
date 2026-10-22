@@ -66,7 +66,7 @@ constexpr bool is_little_endian = (std::endian::native == std::endian::little);
 		}
 
 		// Iterate all the blocks and byteShuffle them in-place
-		std::for_each(std::execution::par, cacheTemporary.begin(), cacheTemporary.end(),
+		std::for_each(PSAPI_EXEC_PARALLEL cacheTemporary.begin(), cacheTemporary.end(),
 			[](std::span<uint8_t>& cacheSpan)
 			{
 				for (uint64_t i = 0; i < blockSize; ++i)
@@ -166,7 +166,7 @@ inline std::vector<uint8_t> endianDecodeBEBinaryArray(std::vector<uint8_t>& data
 		}
 
 		// Iterate all the blocks and byteShuffle them in-place
-		std::for_each(std::execution::par, cacheTemporary.begin(), cacheTemporary.end(),
+		std::for_each(PSAPI_EXEC_PARALLEL cacheTemporary.begin(), cacheTemporary.end(),
 			[](std::span<T>& cacheSpan)
 			{
 				for (uint64_t i = 0; i < blockSize; ++i)
@@ -247,7 +247,7 @@ void endianDecodeBEArray(std::span<T> data)
 	}
 
 	// Iterate all the blocks and byteShuffle them in-place
-	std::for_each(std::execution::par, cacheTemporary.begin(), cacheTemporary.end(),
+	std::for_each(PSAPI_EXEC_PARALLEL cacheTemporary.begin(), cacheTemporary.end(),
 		[](std::span<T>& cacheSpan)
 		{
 			for (uint64_t i = 0; i < blockSize; ++i)
@@ -329,7 +329,7 @@ inline void endianDecodeBEArray<uint8_t>([[maybe_unused]] std::span<uint8_t> dat
 		}
 
 		// Iterate all the blocks and byteShuffle them in-place
-		std::for_each(std::execution::par_unseq, cacheTemporary.begin(), cacheTemporary.end(),
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ cacheTemporary.begin(), cacheTemporary.end(),
 			[](std::span<T>& cacheSpan)
 			{
 				for (uint64_t i = 0; i < blockSize; ++i)

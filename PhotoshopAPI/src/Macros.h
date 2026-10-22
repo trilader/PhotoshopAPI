@@ -29,6 +29,17 @@ typedef float float32_t;
 #define PSAPI_FUNCSIG "Unknown"
 #endif
 
+#if __has_include(<execution>)
+#include <execution>
+#endif
+#if __cpp_lib_execution
+    #define PSAPI_EXEC_PARALLEL std::execution::par,
+    #define PSAPI_EXEC_PARALLEL_UNSEQ std::execution::par_unseq,
+#else
+    #define PSAPI_EXEC_PARALLEL
+    #define PSAPI_EXEC_PARALLEL_UNSEQ
+#endif
+
 // Alias bitDepth types which can be used for template initialization
 PSAPI_NAMESPACE_BEGIN
 

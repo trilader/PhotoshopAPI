@@ -54,7 +54,7 @@ namespace Geometry
         template<typename T>
         void move(std::vector<Point2D<T>>& points, Point2D<T> offset)
         {
-            std::for_each(std::execution::par_unseq, points.begin(), points.end(), [&](Point2D<T>& point)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ points.begin(), points.end(), [&](Point2D<T>& point)
                 {
                     point.x += offset.x;
                     point.y += offset.y;
@@ -68,7 +68,7 @@ namespace Geometry
         template<typename T>
         void move(std::vector<Vertex<T>>& vertices, Point2D<T> offset)
         {
-            std::for_each(std::execution::par_unseq, vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
                 {
                     vertex.point().x += offset.x;
                     vertex.point().y += offset.y;
@@ -86,7 +86,7 @@ namespace Geometry
             double cos_theta = std::cos(angle);
             double sin_theta = std::sin(angle);
 
-            std::for_each(std::execution::par_unseq, points.begin(), points.end(), [&](Point2D<T>& point)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ points.begin(), points.end(), [&](Point2D<T>& point)
                 {
                     T x = point.x - center.x;
                     T y = point.y - center.y;
@@ -112,7 +112,7 @@ namespace Geometry
             double cos_theta = std::cos(angle);
             double sin_theta = std::sin(angle);
 
-            std::for_each(std::execution::par_unseq, vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
                 {
                     T x = vertex.point().x - center.x;
                     T y = vertex.point().y - center.y;
@@ -135,7 +135,7 @@ namespace Geometry
         template<typename T>
         void scale(std::vector<Point2D<T>>& points, double factor, Point2D<T> center)
         {
-            std::for_each(std::execution::par_unseq, points.begin(), points.end(), [&](Point2D<T>& point)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ points.begin(), points.end(), [&](Point2D<T>& point)
                 {
                     T x = point.x - center.x;
                     T y = point.y - center.y;
@@ -154,7 +154,7 @@ namespace Geometry
         template<typename T>
         void scale(std::vector<Vertex<T>>& vertices, double factor, Point2D<T> center)
         {
-            std::for_each(std::execution::par_unseq, vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
                 {
                     T x = vertex.point().x - center.x;
                     T y = vertex.point().y - center.y;
@@ -173,7 +173,7 @@ namespace Geometry
         template<typename T>
         void scale(std::vector<Point2D<T>>& points, Point2D<T> scalar, Point2D<T> center)
         {
-            std::for_each(std::execution::par_unseq, points.begin(), points.end(), [&](Point2D<T>& point)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ points.begin(), points.end(), [&](Point2D<T>& point)
                 {
                     T x = point.x - center.x;
                     T y = point.y - center.y;
@@ -192,7 +192,7 @@ namespace Geometry
         template<typename T>
         void scale(std::vector<Vertex<T>>& vertices, Point2D<T> scalar, Point2D<T> center)
         {
-            std::for_each(std::execution::par_unseq, vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
                 {
                     T x = vertex.point().x - center.x;
                     T y = vertex.point().y - center.y;
@@ -214,7 +214,7 @@ namespace Geometry
         {
             bool zero_division = false;
 
-            std::for_each(std::execution::par_unseq, points.begin(), points.end(), [&](Point2D<T>& point)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ points.begin(), points.end(), [&](Point2D<T>& point)
                 {
                     // Convert to homogeneous coordinates
                     Eigen::Matrix<T, 3, 1> homogenous_points;
@@ -251,7 +251,7 @@ namespace Geometry
         {
             bool zero_division = false;
 
-            std::for_each(std::execution::par_unseq, vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
+            std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertices.begin(), vertices.end(), [&](Vertex<T>& vertex)
                 {
                     Point2D<T> point = vertex.point();
 

@@ -427,7 +427,7 @@ protected:
 
 		// Allocate image data and then fill it by decompressing in parallel
 		data_type data = WritableImageDataMixin<T>::parallel_alloc_image_data(_channel_indices, channel_size);
-		std::for_each(std::execution::par_unseq, data.begin(), data.end(), [&](auto& pair)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ data.begin(), data.end(), [&](auto& pair)
 			{
 				auto& [key, channel_buffer] = pair;
 				auto idinfo = Enum::toChannelIDInfo(key, Layer<T>::m_ColorMode);

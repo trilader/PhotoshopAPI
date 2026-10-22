@@ -66,7 +66,7 @@ namespace Render
 		// Perform deinterleaving
 		const std::size_t spans_size = spans.size();
 		auto indices = std::views::iota(static_cast<std::size_t>(0), spans.front().size());
-		std::for_each(std::execution::par_unseq, indices.begin(), indices.end(), [&](auto idx)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ indices.begin(), indices.end(), [&](auto idx)
 			{
 				const std::size_t interleaved_base_idx = idx * spans_size;
 				for (std::size_t i = 0; i < spans_size; ++i)
@@ -116,7 +116,7 @@ namespace Render
 		// Perform deinterleaving
 		const std::size_t spans_size = channel_spans.size();
 		auto indices = std::views::iota(static_cast<std::size_t>(0), channel_spans.front().size());
-		std::for_each(std::execution::par_unseq, indices.begin(), indices.end(), [&](auto idx)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ indices.begin(), indices.end(), [&](auto idx)
 			{
 				const std::size_t interleaved_base_idx = idx * spans_size;
 				for (std::size_t i = 0; i < spans_size; ++i)
@@ -160,7 +160,7 @@ namespace Render
 
 		// Allocate vectors for each channel
 		std::vector<std::vector<T>> channels(num_channels);
-		std::for_each(std::execution::par_unseq, channels.begin(), channels.end(), [channel_size](std::vector<T>& channel)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ channels.begin(), channels.end(), [channel_size](std::vector<T>& channel)
 			{
 				channel = std::vector<T>(channel_size);
 			});

@@ -220,7 +220,7 @@ namespace Geometry
             std::vector<Vertex<double>> vertices(divisions_x * divisions_y);
             {
                 PSAPI_PROFILE_SCOPE("EvaluateBezier");
-                std::for_each(std::execution::par_unseq, vertices.begin(), vertices.end(), [&](Vertex<double>& vertex)
+                std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertices.begin(), vertices.end(), [&](Vertex<double>& vertex)
                     {
                         // Calculate the index of the vertex in the 2D grid
                         size_t index = &vertex - vertices.data();

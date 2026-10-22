@@ -853,7 +853,7 @@ namespace Render
                     auto horizontal_iter = std::views::iota(min_x, max_x);
                     const auto alpha_width = this->alpha().width;
 
-                    std::for_each(std::execution::par_unseq, vertical_iter.begin(), vertical_iter.end(), [&](size_t y)
+                    std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertical_iter.begin(), vertical_iter.end(), [&](size_t y)
                         {
                             for (auto x : horizontal_iter)
                             {
@@ -874,7 +874,7 @@ namespace Render
             // Apply the opacity
             if (this->metadata.opacity != 1.0f)
             {
-                std::for_each(std::execution::par_unseq, _alpha.begin(), _alpha.end(), [&](auto& value)
+                std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ _alpha.begin(), _alpha.end(), [&](auto& value)
                     {
                         value = value * this->metadata.opacity;
                     });

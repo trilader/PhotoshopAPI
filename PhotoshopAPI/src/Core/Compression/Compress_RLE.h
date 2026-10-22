@@ -320,7 +320,7 @@ std::vector<uint8_t> CompressRLE(std::span<T> uncompressedData, std::span<uint8_
 
     // Compress each scanline while additionally overwriting the compressedDataViews with a properly sized span
     // rather than aligned to maxScanlineSize
-    std::for_each(std::execution::par, verticalIter.begin(), verticalIter.end(), [&](const auto index)
+    std::for_each(PSAPI_EXEC_PARALLEL verticalIter.begin(), verticalIter.end(), [&](const auto index)
         {
             compressedDataViews[index] = RLE_Impl::CompressPackBits(uncompressedDataViews[index], compressedDataViews[index]);
         });
@@ -340,7 +340,7 @@ std::vector<uint8_t> CompressRLE(std::span<T> uncompressedData, std::span<uint8_
         }
         compressedData = std::vector<uint8_t>(totalSize);
 
-        std::for_each(std::execution::par, verticalIter.begin(), verticalIter.end(), [&](const auto index)
+        std::for_each(PSAPI_EXEC_PARALLEL verticalIter.begin(), verticalIter.end(), [&](const auto index)
             {
                 const uint8_t* srcAddress = compressedDataViews[index].data();
                 uint8_t* dstAddress = compressedData.data() + scanlineOffsets[index];
@@ -363,7 +363,7 @@ std::vector<uint8_t> CompressRLE(std::span<T> uncompressedData, std::span<uint8_
         }
         compressedData = std::vector<uint8_t>(totalSize);
 
-        std::for_each(std::execution::par, verticalIter.begin(), verticalIter.end(), [&](auto& index)
+        std::for_each(PSAPI_EXEC_PARALLEL verticalIter.begin(), verticalIter.end(), [&](auto& index)
             {
                 const uint8_t* srcAddress = compressedDataViews[index].data();
                 uint8_t* dstAddress = compressedData.data() + scanlineOffsets[index];

@@ -164,7 +164,7 @@ struct LinkedLayerData
 		data_type out;
 		std::mutex mutex;
 
-		std::for_each(std::execution::par_unseq , m_ImageData.begin(), m_ImageData.end(), [&](const auto& pair)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ m_ImageData.begin(), m_ImageData.end(), [&](const auto& pair)
 			{
 				const auto& key = pair.first;
 				const auto& channel = pair.second;
@@ -402,7 +402,7 @@ private:
 
 		/// Extract the image data and store it in our m_ImageData
 		std::mutex insertion_mutex;
-		std::for_each(std::execution::par_unseq, channelnames.begin(), channelnames.end(), [&](auto name)
+		std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ channelnames.begin(), channelnames.end(), [&](auto name)
 			{
 				/// Extract all indices from 0-2 as these will represent our RGB channels,
 				/// we handle alpha separately

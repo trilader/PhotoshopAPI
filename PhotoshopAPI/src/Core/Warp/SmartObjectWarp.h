@@ -109,7 +109,7 @@ namespace SmartObject
 			size_t max_x = static_cast<size_t>(std::min<double>(std::round(bbox.maximum.x), static_cast<double>(buffer.width - 1)));
 
 			auto vertical_iter = std::views::iota(min_y, max_y);
-			std::for_each(std::execution::par_unseq, vertical_iter.begin(), vertical_iter.end(), [&](const size_t y)
+			std::for_each(PSAPI_EXEC_PARALLEL_UNSEQ vertical_iter.begin(), vertical_iter.end(), [&](const size_t y)
 				{
 					constexpr double failure_condition = -1.0f;
 					constexpr T max_t = std::is_same_v<T, float32_t> ? static_cast<T>(1) : std::numeric_limits<T>::max();

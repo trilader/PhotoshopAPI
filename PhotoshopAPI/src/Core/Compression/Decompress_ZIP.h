@@ -84,7 +84,7 @@ namespace ZIP_Impl
 		std::vector<uint32_t> verticalIter = createVerticalImageIterator(height);
 
 		// Perform prediction decoding per scanline of data in-place
-		std::for_each(std::execution::par, verticalIter.begin(), verticalIter.end(),
+		std::for_each(PSAPI_EXEC_PARALLEL verticalIter.begin(), verticalIter.end(),
 			[&](uint32_t y)
 			{
 				for (uint64_t x = 1; x < width; ++x)
