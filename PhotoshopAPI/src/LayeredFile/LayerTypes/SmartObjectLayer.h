@@ -21,7 +21,7 @@
 #include <string>
 #include <cassert>
 
-#include "fmt/core.h"
+#include "fmt/format.h"
 #include <Eigen/Dense>
 #include <OpenImageIO/imageio.h>
 

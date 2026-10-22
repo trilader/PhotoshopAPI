@@ -6,7 +6,7 @@
 
 #include "Util/DescriptorUtil.h"
 
-#include "fmt/core.h"
+#include "fmt/format.h"
 
 PSAPI_NAMESPACE_BEGIN
 

@@ -16,7 +16,7 @@
 #include <vector>
 #include <set>
 
-#include "fmt/core.h"
+#include "fmt/format.h"
 #include "nlohmann/json.hpp"
 
 PSAPI_NAMESPACE_BEGIN
