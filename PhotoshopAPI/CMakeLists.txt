@@ -4,7 +4,7 @@ project(PhotoshopAPI)
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/*.cpp")
 file(GLOB_RECURSE PhotoshopAPI_Headers CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/*.h")
 
-add_library(PhotoshopAPI STATIC ${MY_SOURCES})
+add_library(PhotoshopAPI SHARED ${MY_SOURCES})
 target_sources(PhotoshopAPI INTERFACE
     FILE_SET HEADERS
     TYPE HEADERS
