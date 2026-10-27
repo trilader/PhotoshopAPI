@@ -18,6 +18,7 @@ option(PSAPI_BUILD_BENCHMARKS "Build the benchmarks associated with the Photosho
 option(PSAPI_BUILD_DOCS "Builds the documentation, requires some external installs which are documented in the README.md" OFF)
 option(PSAPI_BUILD_PYTHON "Build the python bindings associated with the PhotoshopAPI" ON)
 option(PSAPI_USE_SYSTEM_SIMDUTF "Use system provided simdutf libary" OFF)
+option(PSAPI_USE_SYSTEM_MIO "Use system provided mio libary" OFF)
 
 if (PSAPI_BUILD_PYTHON)
     # Link in the msvc runtime so that users dont need vcredist when using the python bindings
@@ -68,13 +69,15 @@ else()
     add_subdirectory (thirdparty/simdutf)
 endif()
 
+# Add mio for memory-mapped IO files
+if(PSAPI_USE_SYSTEM_MIO)
+    find_package(mio CONFIG REQUIRED)
+else()
+    add_subdirectory (thirdparty/mio)
+endif()
 
 # Add thirdparty libraries
 # --------------------------------------------------------------------------
-
-# Add mio for memory-mapped IO files
-add_subdirectory (thirdparty/mio)
-
 
 # Add doctest
 add_library(doctest INTERFACE)
