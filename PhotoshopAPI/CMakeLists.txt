@@ -2,8 +2,15 @@
 # --------------------------------------------------------------------------
 project(PhotoshopAPI)
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE PhotoshopAPI_Headers CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/src/*.h")
 
 add_library(PhotoshopAPI STATIC ${MY_SOURCES})
+target_sources(PhotoshopAPI INTERFACE
+    FILE_SET HEADERS
+    TYPE HEADERS
+    FILES ${PhotoshopAPI_Headers} ${PROJECT_SOURCE_DIR}/include/PhotoshopAPI.h
+    BASE_DIRS ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/src
+)
 
 set_property(TARGET PhotoshopAPI PROPERTY POSITION_INDEPENDENT_CODE 1)
 set_property(TARGET blosc2_static PROPERTY POSITION_INDEPENDENT_CODE 1)
@@ -55,3 +62,8 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
 	# Works around an AppleClang 21 consteval bug in fmt (fmtlib/fmt#4740)
 	target_compile_definitions(PhotoshopAPI PUBLIC FMT_USE_CONSTEVAL=0)
 endif()
+
+install(
+    TARGETS PhotoshopAPI
+    FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/PhotoshopAPI
+)

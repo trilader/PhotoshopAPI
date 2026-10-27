@@ -135,3 +135,5 @@ if(PSAPI_BUILD_PYTHON)
     add_subdirectory (thirdparty/pybind11)
     add_subdirectory (python)
 endif()
+
+include(GNUInstallDirs)
