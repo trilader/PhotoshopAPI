@@ -17,7 +17,7 @@ option(PSAPI_BUILD_EXAMPLES "Build the examples associated with the PhotoshopAPI
 option(PSAPI_BUILD_BENCHMARKS "Build the benchmarks associated with the PhotoshopAPI" ON)
 option(PSAPI_BUILD_DOCS "Builds the documentation, requires some external installs which are documented in the README.md" OFF)
 option(PSAPI_BUILD_PYTHON "Build the python bindings associated with the PhotoshopAPI" ON)
-
+option(PSAPI_USE_SYSTEM_SIMDUTF "Use system provided simdutf libary" OFF)
 
 if (PSAPI_BUILD_PYTHON)
     # Link in the msvc runtime so that users dont need vcredist when using the python bindings
@@ -59,6 +59,14 @@ find_package(fmt CONFIG REQUIRED)
 # UUID for storing e.g. uuids of smart objects
 find_package(stduuid CONFIG REQUIRED)
 
+if(PSAPI_USE_SYSTEM_SIMDUTF)
+    find_package(simdutf CONFIG REQUIRED)
+else()
+    set (SIMDUTF_TESTS OFF)
+    set (SIMDUTF_TOOLS OFF)
+    set (SIMDUTF_ICONV OFF)
+    add_subdirectory (thirdparty/simdutf)
+endif()
 
 
 # Add thirdparty libraries
@@ -71,12 +79,6 @@ add_subdirectory (thirdparty/mio)
 # Add doctest
 add_library(doctest INTERFACE)
 target_include_directories(doctest SYSTEM INTERFACE thirdparty/doctest/doctest)
-
-# Add simdutf for UTF conversion operations
-set (SIMDUTF_TESTS OFF)
-set (SIMDUTF_TOOLS OFF)
-set (SIMDUTF_ICONV OFF)
-add_subdirectory (thirdparty/simdutf)
 
 if(PSAPI_BUILD_PYTHON)
     # Add span from tcb for compatibility with older compilers for python bindings
