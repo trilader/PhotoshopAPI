@@ -14,13 +14,16 @@ target_link_libraries(PhotoshopAPI PUBLIC
     OpenImageIO::OpenImageIO
     Eigen3::Eigen
     mio::mio-headers 
-    tcb_span 
     compressed_image
     $<IF:$<TARGET_EXISTS:libdeflate::libdeflate_static>,libdeflate::libdeflate_static,libdeflate::libdeflate_shared>
     simdutf
     fmt::fmt
     stduuid
 )
+
+if(PSAPI_BUILD_PYTHON)
+    target_link_libraries(PhotoshopAPI PUBLIC tcb_span)
+endif()
 
 if(MSVC)
 	target_compile_options(PhotoshopAPI PRIVATE /MP /DNOMINMAX)

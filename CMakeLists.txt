@@ -78,9 +78,11 @@ set (SIMDUTF_TOOLS OFF)
 set (SIMDUTF_ICONV OFF)
 add_subdirectory (thirdparty/simdutf)
 
-# Add span from tcb for compatibility with older compilers for python bindings
-add_library(tcb_span INTERFACE)
-target_include_directories(tcb_span SYSTEM INTERFACE thirdparty/compatibility)
+if(PSAPI_BUILD_PYTHON)
+    # Add span from tcb for compatibility with older compilers for python bindings
+    add_library(tcb_span INTERFACE)
+    target_include_directories(tcb_span SYSTEM INTERFACE thirdparty/compatibility)
+endif()
 
 # CompressedImage for loading images into a compressed memory buffer as well as storing our channels
 set(COMPRESSED_IMAGE_USE_VCPKG OFF)
