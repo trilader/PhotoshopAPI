@@ -19,6 +19,7 @@ option(PSAPI_BUILD_DOCS "Builds the documentation, requires some external instal
 option(PSAPI_BUILD_PYTHON "Build the python bindings associated with the PhotoshopAPI" ON)
 option(PSAPI_USE_SYSTEM_SIMDUTF "Use system provided simdutf libary" OFF)
 option(PSAPI_USE_SYSTEM_MIO "Use system provided mio libary" OFF)
+option(PSAPI_BLOSC2_PREFER_SYSTEM_LIBS "Tell bundled blosc2 to prefer system libraries" OFF)
 
 if (PSAPI_BUILD_PYTHON)
     # Link in the msvc runtime so that users dont need vcredist when using the python bindings
@@ -90,6 +91,12 @@ if(PSAPI_BUILD_PYTHON)
 endif()
 
 # CompressedImage for loading images into a compressed memory buffer as well as storing our channels
+# CompressedImage bundles blosc2, tell it to use prefer using system libraries when requested
+if(PSAPI_BLOSC2_PREFER_SYSTEM_LIBS)
+    set(PREFER_EXTERNAL_LZ4 ON)
+    set(PREFER_EXTERNAL_ZLIB ON)
+    set(PREFER_EXTERNAL_ZSTD ON)
+endif()
 set(COMPRESSED_IMAGE_USE_VCPKG OFF)
 add_subdirectory(thirdparty/compressed-image)
 
