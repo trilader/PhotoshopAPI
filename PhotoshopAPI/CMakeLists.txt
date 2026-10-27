@@ -22,7 +22,7 @@ target_link_libraries(PhotoshopAPI PUBLIC
     Eigen3::Eigen
     mio::mio-headers 
     compressed_image
-    $<IF:$<TARGET_EXISTS:libdeflate::libdeflate_static>,libdeflate::libdeflate_static,libdeflate::libdeflate_shared>
+    libdeflate::libdeflate_shared
     simdutf
     fmt::fmt
     stduuid
